@@ -1,5 +1,5 @@
 {
-  "name": "invent/laravel-componentes",
+  "name": "invent-ifto/laravel-components",
   "description": "Componente Laravel de alerta baseado em AdminLTE",
   "type": "library",
   "license": "MIT",
