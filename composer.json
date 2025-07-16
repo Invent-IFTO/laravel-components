@@ -1,0 +1,22 @@
+{
+  "name": "invent/laravel-componentes",
+  "description": "Componente Laravel de alerta baseado em AdminLTE",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Invent\\LaravelComponents\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "jeroennoten/laravel-adminlte": "^3.9"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Invent\\LaravelComponents\\InventProvider"
+      ]
+    }
+  }
+}
