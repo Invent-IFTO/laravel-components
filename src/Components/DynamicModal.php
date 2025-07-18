@@ -1,21 +1,28 @@
 <?php
 
-namespace Invent\LaravelComponents\Components;
+namespace Invent\LaravelComponents;
 
-use Illuminate\View\Component;
+use JeroenNoten\LaravelAdminLte\Form\Button;
+use Closure;
+use Illuminate\Contracts\View\View;
 
-class DynamicModal extends Component
+class DynamicModal extends Button
 {
-    public $tipo;
-    public $mensagem;
-
-    public function __construct($tipo = 'info', $mensagem = '')
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(public $url, public $method="get", public $title = "", $label = null, $type = 'button', $theme = 'default', $icon = null)
     {
-        $this->tipo = $tipo;
-        $this->mensagem = $mensagem;
+        parent::__construct($label, $type, $theme, $icon);
+        if(empty($this->title)) {
+           $this->title = $label;
+        }
     }
 
-    public function render()
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
     {
         return view('invent::components.dynamic-modal');
     }
