@@ -1,10 +1,10 @@
 <?php
 
-namespace Invent\LaravelComponents;
+namespace Invent\LaravelComponents\Components;
 
-use JeroenNoten\LaravelAdminLte\Form\Button;
 use Closure;
 use Illuminate\Contracts\View\View;
+use JeroenNoten\LaravelAdminLte\View\Components\Form\Button;
 
 class DynamicModal extends Button
 {
