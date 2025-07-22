@@ -8,33 +8,33 @@
 
 
 @once
-    @push('js')
+      <x-adminlte-modal id="dynamic_modal" title="{{ $title }}" size="lg" theme="{{$theme}}" v-centered
+        static-backdrop scrollable icon="{{ $icon }}" class="text-center">
+        {{-- Modal body --}}
+        <div></div>
+        <x-slot name="footerSlot">
 
-        <x-adminlte-modal id="dynamic_modal" title="{{ $title }}" size="lg" theme="{{$theme}}" icon="fas fa-wallet" v-centered
-            static-backdrop scrollable icon="{{ $icon }}">
+            <x-adminlte-button theme="secondary" class="mr-auto" label="Cancelar" data-dismiss="modal" />
 
-            <x-slot name="footerSlot">
-
-                <x-adminlte-button theme="secondary" class="mr-auto" label="Cancelar" data-dismiss="modal" />
-
-                <div class="action-buttons" style="display:none;">
-                    <x-adminlte-button icon="fas fa-eraser" theme="warning" label="Limpar" id="dynamic_modal_form_reset" />
-                    <x-adminlte-button icon="fas fa-save" theme="primary" label="Salvar" id="dynamic_modal_form_submit" />
-                    <div class="loading text-center">
-                        <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
-                            <span class="sr-only">Carregando...</span>
-                        </div>
-                    </div>
-
-                    <div class="error text-center">
-                        <i class="fas fa-exclamation-triangle text-danger fa-5x"></i>
-                        <div class="text-danger" role="alert">
-                            Ocorreu um erro ao carregar o conteúdo. Por favor, tente novamente.
-                        </div>
+            <div class="action-buttons" style="display:none;">
+                <x-adminlte-button icon="fas fa-eraser" theme="warning" label="Limpar" id="dynamic_modal_form_reset" />
+                <x-adminlte-button icon="fas fa-save" theme="primary" label="Salvar" id="dynamic_modal_form_submit" />
+                <div class="loading text-center">
+                    <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
+                        <span class="sr-only">Carregando...</span>
                     </div>
                 </div>
-            </x-slot>
-        </x-adminlte-modal>
+
+                <div class="error text-center">
+                    <i class="fas fa-exclamation-triangle text-danger fa-5x"></i>
+                    <div class="text-danger" role="alert">
+                        Ocorreu um erro ao carregar o conteúdo. Por favor, tente novamente.
+                    </div>
+                </div>
+            </div>
+        </x-slot>
+    </x-adminlte-modal>
+    @push('js')
         <script>
             $('button[data-toggle="dynamic-modal"]').on('click', function () {
                 const url = $(this).data('url');
@@ -43,10 +43,10 @@
                 const icon = $(this).data('icon');
                 const theme = $(this).data('theme');
                 const modal = $('#dynamic_modal');
-                const loading = $('#dynamic_modal .loading');
-                const error = $('#dynamic_modal .error');
-                const actionButtons = $('.action-buttons');
-                const body = $('#dynamic_modal .modal-body');
+                const loading = modal.find('.loading');
+                const error = modal.find('.error');
+                const actionButtons = modal.find('.action-buttons');
+                const body = modal.find('.modal-body');
                 const header = modal.find('.modal-header');
                 const header_title = header.find('.modal-title');
                 const setBody = function (component) {
@@ -99,6 +99,7 @@
                             $('#dynamic_modal_form_reset').on('click', function () {
                                 form[0].reset();
                             });
+                            form.append(`<input type="hidden" name="dynamic_modal_url" value="${url}">`);
                         }
 
                     },
@@ -107,6 +108,15 @@
                     }
                 });
             });
+            @if($errors->any() && old('dynamic_modal_url', false))
+                document.addEventListener("DOMContentLoaded", function () {
+                    const previousUrl = "{{ old('dynamic_modal_url') }}";
+                    const button = document.querySelector('button[data-url="' + previousUrl + '"]');
+                    if (button) {
+                        button.click();
+                    }
+                });
+            @endif
         </script>
     @endpush
 @endonce

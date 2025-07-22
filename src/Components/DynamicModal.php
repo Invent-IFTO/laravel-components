@@ -11,12 +11,21 @@ class DynamicModal extends Button
     /**
      * Create a new component instance.
      */
-    public function __construct(public $url, public $method="get", public $title = "", $label = null, $type = 'button', $theme = 'default', $icon = null)
+    public function __construct(public $url, public $method = "get", public $title = "", $label = null, $type = 'button', $theme = 'default', $icon = null)
     {
         parent::__construct($label, $type, $theme, $icon);
-        if(empty($this->title)) {
-           $this->title = $label;
+        if (empty($this->title)) {
+            $this->title = $label;
         }
+        if (old(key: 'dynamic_modal_url') && session()->has('errors')) {           
+              session()->put('dynamic_modal_errors', session()->get('errors'));
+             session()->put('dynamic_modal_old_input', session()->get('_old_input'));
+        }else{
+            session()->forget('dynamic_modal_errors');
+            session()->forget('dynamic_modal_old_input');
+        }
+        
+
     }
 
     /**
