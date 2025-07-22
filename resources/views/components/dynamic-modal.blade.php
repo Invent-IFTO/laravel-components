@@ -1,6 +1,6 @@
 <button type="{{ $type }}" {{ $attributes->merge(['class' => "btn btn-{$theme}"]) }} data-url="{{ $url }}"
     data-method="{{ $method }}" data-toggle="dynamic-modal" data-title="{{ $title }}" data-icon="{{ $icon }}"
-    data-theme="{{ $theme }}">
+    data-theme="{{ $theme }}" title="{{ $title}}">
     {{-- Button content --}}
     @isset($icon) <i class="{{ $icon }}"></i> @endisset
     @isset($label) {{ $label }} @endisset
