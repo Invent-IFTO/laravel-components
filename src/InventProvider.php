@@ -7,11 +7,24 @@ use Illuminate\Support\Facades\Blade;
 
 class InventProvider extends ServiceProvider
 {
+
+    protected array $commands =
+        [
+            \Invent\LaravelComponents\Console\Commands\AddChange::class,
+            \Invent\LaravelComponents\Console\Commands\GerarManifestIcons::class,
+            \Invent\LaravelComponents\Console\Commands\RevertLastVersion::class,
+            \Invent\LaravelComponents\Console\Commands\VersionInfo::class,
+            \Invent\LaravelComponents\Console\Commands\VersionSystem::class,
+        ];
+
+
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'invent');
 
         Blade::componentNamespace('Invent\\LaravelComponents\\Components', 'invent');
+        Blade::component(\Invent\LaravelComponents\Components\Layouts\App::class, 'app');
+
         $router = $this->app['router'];
 
         // Registra o alias
@@ -24,9 +37,21 @@ class InventProvider extends ServiceProvider
             __DIR__ . '/lang' => resource_path('lang/vendor/invent'),
         ], 'invent-translations');
 
+        $this->publishes([
+            __DIR__ . '/config/invent.php' => config_path('invent.php'),
+        ], 'invent-config');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
+
     }
 
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/invent.php',
+            'invent'
+        );
     }
 }

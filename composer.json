@@ -10,7 +10,8 @@
   },
   "require": {
     "php": "^8.1",
-    "jeroennoten/laravel-adminlte": "^3.9"
+    "jeroennoten/laravel-adminlte": "^3.9",
+    "intervention/image": "^3.11"
   },
   "extra": {
     "laravel": {

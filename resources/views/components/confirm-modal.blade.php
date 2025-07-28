@@ -1,48 +1,41 @@
-<button type="{{ $type }}" {{ $attributes->merge(['class' => "btn btn-{$theme}"]) }} data-url="{{ $url }}"
-    data-method="{{ $method }}" data-toggle="confirm-modal" title="{{ $title }}" data-title="{{ $title }}" data-icon="{{ $icon }}"
-    data-theme="{{ $theme }}" data-confirm-label="{{ $confirmLabel }}" data-confirm-theme="{{ $confirmTheme }}"
-    data-confirm-icon="{{ $confirmIcon }}" data-confirm-message="{{ $message }}" @if(isset($input))
-    data-input="{{ $input }}" @endif>
-    {{-- Button content --}}
-    @isset($icon) <i class="{{ $icon }}"></i> @endisset
-    @isset($label) {{ $label }} @endisset
-</button>
-
-
 @once
-    <x-adminlte-modal id="confirm-modal" title="{{ $title }}" size="lg" theme="{{$theme}}" class="text-center"
-        icon="{{ $icon }}" v-centered static-backdrop scrollable>
-        modal-body
-        <x-slot name="footerSlot">
-            <x-adminlte-button theme="secondary" class="mr-auto" label="Cancelar" data-dismiss="modal" />
-            <form>
-                @csrf
-                @method('get')
-                <x-adminlte-button type="submit" icon="fas fa-check" theme="{{ $confirmTheme }}" label="Confirmar" />
-            </form>
-        </x-slot>
-    </x-adminlte-modal>
+    @prepend('js')
+        <x-adminlte-modal id="confirm-modal" title="Confirme Modal" size="lg" theme="secondary" class="text-center"
+            icon="fas fa-exclamation" v-centered static-backdrop scrollable>
+            modal-body
+            <x-slot name="footerSlot">
+                <x-adminlte-button theme="secondary" class="mr-auto" label="Cancelar" data-dismiss="modal" />
+                <form>
+                    @csrf
+                    @method('get')
+                    <x-adminlte-button type="submit" icon="fas fa-check" theme="primary" label="Confirmar" />
+                </form>
+            </x-slot>
+        </x-adminlte-modal>
+    @endprepend
     @push('js')
         <script>
-            $('button[data-toggle="confirm-modal"]').on('click', function () {
-                const url = $(this).data('url');
-                const method = $(this).data('method') || 'get';
-                const title = $(this).data('title');
-                const icon = $(this).data('icon');
-                const theme = $(this).data('theme');
+            function confirmModal(target) {
+                const url = $(target).data('url');
+                const method = $(target).data('method') || 'get';
+                const title = $(target).data('title');
+                const icon = $(target).data('icon');
+                const theme = $(target).data('theme');
+                const placeholder = $(target).data('placeholder');
                 const modal = $('#confirm-modal');
                 const actionButtons = modal.find('.modal-footer');
                 const body = modal.find('.modal-body');
                 const header = modal.find('.modal-header');
                 const header_title = header.find('.modal-title');
                 const confirm_button = modal.find('button[type="submit"]');
-                const confirm_label = $(this).data('confirm-label') || 'Confirmar';
-                const confirm_theme = $(this).data('confirm-theme') || theme;
-                const confirm_icon = $(this).data('confirm-icon') || 'fas fa-check';
-                const confirm_message = $(this).data('confirm-message') || 'Você tem certeza que deseja realizar esta ação?';
+                const confirm_label = $(target).data('confirm-label') || 'Confirmar';
+                const confirm_theme = $(target).data('confirm-theme') || theme;
+                const confirm_icon = $(target).data('confirm-icon') || 'fas fa-check';
+                const confirm_message = $(target).data('confirm-message') || 'Você tem certeza que deseja realizar esta ação?';
                 const form = modal.find('form');
                 const laravel_method = form.find('input[name="_method"]');
-                const input = $(this).data('input');
+                const input = $(target).data('input');
+
 
                 form.attr('action', url);
                 form.attr('method', (method.toLowerCase == 'get') ? "get" : "post");
@@ -79,7 +72,7 @@
                         .attr('name', 'confirm')
                         .attr('value', '')
                         .addClass('form-control')
-                        .attr('placeholder', '{{ $placeholder }}');
+                        .attr('placeholder', placeholder);
                     inputValue.on('keyup', function (e) {
                         if (e.key == 'Enter') {
                             confirm_button.trigger('click');
@@ -87,7 +80,7 @@
                     });
 
                     const feedback = $('<span>').attr('class', 'invalid-feedback text-left text-bold')
-                        .text('{{ $placeholder }}');
+                        .text('placeholder');
                     form_group.append(inputValue);
                     form_group.append(feedback);
                     confirm_button.on('click', function (e) {
@@ -100,13 +93,15 @@
                             form.submit();
                             inputValue.removeClass('is-invalid');
                             form_group.find('.invalid-feedback').hide();
-                            
+
                         }
                     });
                 }
                 setBody(text);
+                modal.css('z-index',1100);
                 modal.modal('show');
-            });
+                
+            }
         </script>
     @endpush
 @endonce
