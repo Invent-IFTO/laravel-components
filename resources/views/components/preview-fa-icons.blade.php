@@ -10,7 +10,7 @@
         function updateIconPreview(input) {
             const preview = input.nextElementSibling.querySelector('.icon-preview>i');
             if (input && preview) {
-                preview.className = input.value || 'fas fa-question text-2xl';
+                preview.className = input.value;
                 input.setAttribute('data-value', input.value);
             }
         }
