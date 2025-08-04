@@ -1,5 +1,5 @@
 <x-adminlte.form.input :name="$name" :label="$label" :attributes="$attributes" class="preview-fa-icons" :id="$id"
-    oninput="updateIconPreview(this)">
+    oninput="updateIconPreview(this)" :enable-old-support="$enableOldSupport">
     <x-slot name="appendSlot">
         <div class="input-group-text px-5 icon-preview"><i class=""></i></div>
     </x-slot>
