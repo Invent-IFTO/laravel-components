@@ -10,20 +10,22 @@
 
 {{-- Input --}}
 
-<div class="row">
+<div class="row text-center w-100 justify-content-center">
     @foreach ($themes as $theme)
-        <div class="col-4 col-md-2 mb-3 m-3">
-            <div class="theme-box border rounded text-center position-relative p-3 bg-{{ $theme }}" style=" width: 100%; height: 50px; cursor: pointer; transition: transform 0.2s;" data-theme="{{ $theme }}">
+        <div class="col-4 col-md-2 col-xl-1">
+            <div class="theme-box border rounded text-center position-relative bg-{{ $theme }} m-1"
+                style=" width: 100%; height: 50px; cursor: pointer; transition: transform 0.2s; line-height: 50px;" data-theme="{{ $theme }}">
                 @if ($getOldValue($errorKey, $attributes->get('value')) === $theme)
                     <i class="fas fa-check-circle check-icon" style="position: absolute;
-                        top: 5px;
-                        right: 5px;
-                        font-size: 1.5rem;"></i>
+                                top: 5px;
+                                right: 5px;
+                                font-size: 1.5rem;"></i>
                 @endif
+                <div class="text-center font-weight-bold">
+                    {{ ucfirst($theme) }}
+                </div>
             </div>
-            <div class="text-center mt-2 font-weight-bold">
-                {{ ucfirst($theme) }}
-            </div>
+
         </div>
     @endforeach
 </div>
@@ -51,9 +53,9 @@
                     document.querySelectorAll('.theme-box .check-icon').forEach(icon => icon.remove());
                     const icon = document.createElement('i');
                     icon.classList.add('fas', 'fa-check-circle', 'check-icon');
-                    icon.style="position: absolute; top: 5px; right: 5px; font-size: 1.5rem;";
+                    icon.style = "position: absolute; top: 5px; right: 5px; font-size: 1.5rem;";
                     this.appendChild(icon);
-                    document.getElementById('selectedTheme').value = this.dataset.theme;
+                    document.getElementById('{{ $id }}').value = this.dataset.theme;
                 });
             });
         </script>
