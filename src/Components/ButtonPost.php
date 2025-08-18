@@ -3,10 +3,10 @@
 namespace Invent\LaravelComponents\Components;
 
 use Closure;
+use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
-use Psy\Output\Theme;
 
-class ButtonPost
+class ButtonPost extends Component
 {
     
     /**
@@ -21,6 +21,6 @@ class ButtonPost
      */
     public function render(): View|Closure|string
     {
-        return view('invent::button-post');
+        return view('invent::components.button-post');
     }
 }

@@ -13,8 +13,7 @@
 @if(config('invent.suporte_confirme_modal', false))
     <x-invent::confirm-modal />
 @endif
-@stack('modals')
-@stop
+@stack('modals')@stop
 @section('footer')
     @include('invent::components.layouts.footer')
 @endsection

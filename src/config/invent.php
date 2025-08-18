@@ -3,7 +3,7 @@
         //trabalhando com a versão do sistema
         'developer' =>
             [
-                'name' => env('APP_DEVELOPER', 'INVENT - FITO'),
+                'name' => env('APP_DEVELOPER', 'INVENT - IFTO'),
                 'site' => env('APP_DEVELOPER_LINK', 'https://if.app.br'),
                 'year' => env('APP_DEVELOPMENT_YEAR', date('Y'))
 
