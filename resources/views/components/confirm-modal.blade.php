@@ -4,7 +4,7 @@
             icon="fas fa-exclamation" v-centered static-backdrop scrollable>
             modal-body
             <x-slot name="footerSlot">
-                <x-adminlte-button theme="secondary" class="mr-auto" label="Cancelar" data-dismiss="modal" />
+                <x-adminlte-button theme="secondary" class="mr-auto" label="Cancelar" data-dismiss="modal" data-bs-dismiss="modal" />
                 <form>
                     @csrf
                     @method('get')

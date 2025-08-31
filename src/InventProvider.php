@@ -40,6 +40,17 @@ class InventProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/invent.php' => config_path('invent.php'),
         ], 'invent-config');
+        
+        $this->publishes([
+             __DIR__ . '/../resources/js'  => resource_path('vendor/invent/js'),
+        ], 'invent-assets');
+
+         $this->publishes([
+             __DIR__ . '/../resources/js'  => resource_path('vendor/invent/js'),
+        ], 'invent-public');
+        
+
+
 
         if ($this->app->runningInConsole()) {
             $this->commands($this->commands);
