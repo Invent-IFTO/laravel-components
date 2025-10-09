@@ -45,7 +45,7 @@ class DeployWebhook implements ShouldQueue
             $removelocal = "&& {$composer} dev:remove-local";    
         }
 
-        $composerCommand = "cd {$path} && export HOME={$composer_home} && export COMPOSER_HOME={$composer_home} && (git restore . && git pull $removelocal && {$composer} update && {$php} artisan migrate --force) >> $log_path 2>&1 &";
+        $composerCommand = "cd {$path} && export HOME={$composer_home} && export COMPOSER_HOME={$composer_home} && (git restore . && git pull $removelocal && {$composer} update && {$php} artisan migrate --force && {$php} artisan php artisan optimize:clear) >> $log_path 2>&1 &";
 
         file_put_contents($log_path, "===== Deploy {$repository} - {$timestamp} =====\n\n exec {$composerCommand} \n\n");
         exec($composerCommand);
