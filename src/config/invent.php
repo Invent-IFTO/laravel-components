@@ -18,4 +18,6 @@
         'suporte_dynamic_modal' => true,
 
         'suporte_alert_flush_message' => true,
+
+        'form_enable_global_error_alert' => true,
     ];

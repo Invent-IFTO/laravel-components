@@ -11,4 +11,8 @@ return
                 'placeholder' => 'Enter the text to confirm',
                 'invalid feedback' => 'The confirmation text does not match the expected value',
             ],
+            'form' =>
+            [
+                'input errors' => 'There are errors in the form. Please check the highlighted fields and try again.',
+            ],
     ];

@@ -25,6 +25,13 @@ class Alert extends Component
                 $this->alerts[$type] = $msg;
             }
         }
+
+        if(config('invent.form_enable_global_error_alert', false) && $session->has('errors')){
+            $errors = $session->get('errors')->all();
+            if(count($errors) > 0){
+                $this->alerts['error'] = __('invent::components.form.input errors');
+            }
+        }
     }
 
     /**

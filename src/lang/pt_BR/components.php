@@ -10,5 +10,9 @@ return
                 'input' => 'Digite o texto ":attribute" para confirmar a ação:',
                 'placeholder' => 'Digite o texto para confirmar',
                 'invalid feedback' => 'O texto de confirmação não corresponde ao esperado',
-            ]
+            ],
+            'form' =>
+            [
+                'input errors' => 'Existem erros no formulário. Por favor, verifique os campos destacados e tente novamente.',
+            ],
     ];
