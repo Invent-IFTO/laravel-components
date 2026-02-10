@@ -35,6 +35,7 @@
                 const form = modal.find('form');
                 const laravel_method = form.find('input[name="_method"]');
                 const input = $(target).data('input');
+                const modal_theme = $(target).data('modal-theme') || theme;
 
 
                 form.attr('action', url);
@@ -61,7 +62,7 @@
                     }
                     header_title.append(" " + title);
                 }
-                toggleTheme(header, theme);
+                toggleTheme(header, modal_theme);
                 toggleTheme(confirm_button, confirm_theme);
                 const text = $(`<div class="form-group"><div class="input-group"><label>${confirm_message}</label></div></div>`);
                 confirm_button.off('click');

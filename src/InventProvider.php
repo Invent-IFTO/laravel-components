@@ -15,6 +15,7 @@ class InventProvider extends ServiceProvider
             \Invent\LaravelComponents\Console\Commands\RevertLastVersion::class,
             \Invent\LaravelComponents\Console\Commands\VersionInfo::class,
             \Invent\LaravelComponents\Console\Commands\VersionSystem::class,
+            \Invent\LaravelComponents\Console\Commands\InventLocalMod::class,
         ];
 
 
