@@ -37,6 +37,7 @@
                 const loading = $('#dynamic_modal_loading');
                 const error = $('#dynamic_modal_error');
                 let container_modals = $('#container_modals').length ? $('#container_modals') : $('body');
+                let error_link = error.find('.error-link');
                 loading.one('shown.bs.modal', function () {
                     $.ajax({
                         url: url,
@@ -73,6 +74,9 @@
                         error: function () {
                             loading.modal("hide");
                             error.modal("show");
+                            @if(config('app.debug'))
+                                error.find('.text-center').append(`<a href="${url}" target="_blank" class="btn btn-link">Veja o erro</a>`);
+                            @endif
                         }
                     });
                 });
