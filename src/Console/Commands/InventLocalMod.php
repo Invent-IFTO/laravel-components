@@ -24,7 +24,7 @@ class InventLocalMod extends Command
             }
             //clonar o repositório do laravel-components na pasta packages/invent-IFTO
             if (!file_exists(base_path('packages/invent-IFTO/laravel-components'))) {
-                exec('git clone https://github.com/invent-IFTO/laravel-components.git ' . base_path('packages/invent-IFTO/laravel-components'));
+                exec('git clone git@github.com:invent-IFTO/laravel-components.git ' . base_path('packages/invent-IFTO/laravel-components'));
             }else{
                 //executar o pull no projeto para atualizar o código
                 exec('cd ' . base_path('packages/invent-IFTO/laravel-components') . ' && git pull');
