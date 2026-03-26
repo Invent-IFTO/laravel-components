@@ -22,6 +22,7 @@
                 const icon = $(target).data('icon');
                 const theme = $(target).data('theme');
                 const placeholder = $(target).data('placeholder');
+                const feedback_msg = $(target).data('feedback');
                 const modal = $('#confirm-modal');
                 const actionButtons = modal.find('.modal-footer');
                 const body = modal.find('.modal-body');
@@ -81,7 +82,7 @@
                     });
 
                     const feedback = $('<span>').attr('class', 'invalid-feedback text-left text-bold')
-                        .text('placeholder');
+                        .text(feedback_msg);
                     form_group.append(inputValue);
                     form_group.append(feedback);
                     confirm_button.on('click', function (e) {
