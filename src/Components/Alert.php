@@ -22,14 +22,14 @@ class Alert extends Component
         foreach ($monitor as $type) {
             $msg = $session->pull($type);
             if ($msg) {
-                $this->alerts[$type] = $msg;
+                $this->alerts[] = ['type' => $type, 'message' => $msg];
             }
         }
 
         if(config('invent.form_enable_global_error_alert', false) && $session->has('errors')){
             $errors = $session->get('errors')->all();
             if(count($errors) > 0){
-                $this->alerts['error'] = __('invent::components.form.input errors');
+                $this->alerts[] = ['type' => 'error', 'message' => __('invent::components.form.input errors')];
             }
         }
     }

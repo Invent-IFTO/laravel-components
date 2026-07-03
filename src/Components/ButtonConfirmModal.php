@@ -9,7 +9,7 @@ use JeroenNoten\LaravelAdminLte\View\Components\Form\Button;
 class ButtonConfirmModal extends Button
 {
 
-    public $title, $confirmLabel, $confirmTheme, $message, $placeholder, $feedback;
+    public $title, $confirmLabel, $confirmTheme, $message, $placeholder, $feedback, $modalTheme;
 
     /**
      * Create a new component instance.
@@ -26,6 +26,7 @@ class ButtonConfirmModal extends Button
         $confirmLabel = null,
         public $confirmIcon = 'fas fa-check',
         $confirmTheme = null,
+        $modalTheme = null,
         )
     {
         parent::__construct($label, 'button', $theme, $icon);
@@ -33,6 +34,7 @@ class ButtonConfirmModal extends Button
         $this->confirmLabel = $confirmLabel ?? __('invent::components.confirm-modal.confirm');
         $this->confirmTheme = $confirmTheme ?? $theme;
         $this->message = $message ?? __('invent::components.confirm-modal.message');
+        $this->modalTheme = $modalTheme ?? $theme;
         if($this->input){
             $this->message = $message ?? __('invent::components.confirm-modal.input',['attribute'=> $this->input]);
             $this->placeholder = __('invent::components.confirm-modal.placeholder');

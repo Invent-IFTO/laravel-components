@@ -21,6 +21,7 @@
                 const title = $(target).data('title');
                 const icon = $(target).data('icon');
                 const theme = $(target).data('theme');
+                const modalTheme = $(target).data('modal-theme');
                 const placeholder = $(target).data('placeholder');
                 const modal = $('#confirm-modal');
                 const actionButtons = modal.find('.modal-footer');
@@ -61,7 +62,7 @@
                     }
                     header_title.append(" " + title);
                 }
-                toggleTheme(header, theme);
+                toggleTheme(header, modalTheme);
                 toggleTheme(confirm_button, confirm_theme);
                 const text = $(`<div class="form-group"><div class="input-group"><label>${confirm_message}</label></div></div>`);
                 confirm_button.off('click');

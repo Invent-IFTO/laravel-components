@@ -23,15 +23,15 @@
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                         };
-                        @foreach($alerts as $type => $alert)
-                            toastr.{{$type}}('{{$alert}}', '{{__(ucfirst($type))}}');
+                        @foreach($alerts as $alert)
+                            toastr.{{$alert['type']}}('{{$alert['message']}}', '{{__(ucfirst($alert['type']))}}');
                         @endforeach
-                                                } else if (typeof flasher !== 'undefined') {
+                     } else if (typeof flasher !== 'undefined') {
 
-                        @foreach($alerts as $type => $alert)
-                            flasher.{{$type}}('{{$alert}}', '{{__(ucfirst($type))}}');
+                        @foreach($alerts as $alert)
+                            flasher.{{$alert['type']}}('{{$alert['message']}}', '{{__(ucfirst($alert['type']))}}');
                         @endforeach
-                                                }
+                    }
 
                 });
             </script>
