@@ -35,6 +35,7 @@ class ButtonConfirmModal extends Button
         $this->confirmTheme = $confirmTheme ?? $theme;
         $this->modalTheme = $modalTheme ?? $theme;
         $this->message = $message ?? __('invent::components.confirm-modal.message');
+        $this->modalTheme = $modalTheme ?? $theme;
         if($this->input){
             $this->message = $message ?? __('invent::components.confirm-modal.input',['attribute'=> $this->input]);
             $this->placeholder = __('invent::components.confirm-modal.placeholder');
