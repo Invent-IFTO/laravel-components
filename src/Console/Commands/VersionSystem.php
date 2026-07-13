@@ -95,7 +95,7 @@ class VersionSystem extends Command
 
         $this->info("Versão v$novaVersao criada com " . count($pending) . " mudanças.");
         exec("git add . ");
-        exec("git commit -m 'Adicionado documentação da versão $novaVersao ao projeto.'");
+        exec("git commit -m \"Adicionado documentação da versão $novaVersao ao projeto.\"");
         exec("git tag v$novaVersao");
         $this->info("Tag git v$novaVersao criada!");
 
